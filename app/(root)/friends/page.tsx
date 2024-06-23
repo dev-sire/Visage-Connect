@@ -1,11 +1,15 @@
-import React from 'react'
+import ConversationFallback from '@/components/shared/conversation/ConversationFallback'
+import ItemList from '@/components/shared/item-list/ItemList'
 
 type Props = {}
 
-const FirendsPage = (props: Props) => {
+const FriendsPage = (props: Props) => {
   return (
-    <div>FirendsPage</div>
+    <>
+      <ItemList title='Friends'>Friends Page</ItemList>
+      <ConversationFallback />
+    </>
   )
 }
 
-export default FirendsPage
+export default FriendsPage
