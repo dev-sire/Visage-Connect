@@ -11,8 +11,8 @@ import { Input } from "@/components/ui/input";
 import { useForm } from "react-hook-form";
 import { useMutationState } from "@/hooks/useMutationState";
 import { api } from "@/convex/_generated/api";
-
-type Props = {}
+import { toast } from "sonner";
+import { ConvexError } from "convex/values";
 
 const addFriendFormSchema = z.object({
     email: z.string()
@@ -20,7 +20,7 @@ const addFriendFormSchema = z.object({
             .email("Please enter a valid email")
 })
 
-const AddFriendDialog = (props: Props) => {
+const AddFriendDialog = () => {
     
     const{ mutate: createRequest, pending } = useMutationState(api.request.create)
 
@@ -30,7 +30,15 @@ const AddFriendDialog = (props: Props) => {
             email: "",
         }
     })
-    const handleSubmit = () => {}
+    const handleSubmit = async (values: z.infer<typeof addFriendFormSchema>) => {
+        await createRequest({email: values.email}).then(() => {
+            form.reset()
+            toast.success("Friend Request Send!")
+
+        }).catch((error) => {
+            toast.error(error instanceof ConvexError ? error.data : "Unexpected Error Occurred")
+        })
+    }
   return (
     <Dialog>
         <Tooltip>

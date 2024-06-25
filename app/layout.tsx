@@ -4,6 +4,7 @@ import "./globals.css";
 import ConvexClientProvider from "@/providers/ConvexClientProvider";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { ThemeProvider } from "@/components/ui/theme/theme-provider";
+import { Toaster } from "@/components/ui/sonner";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -25,6 +26,7 @@ export default function RootLayout({
             <TooltipProvider>
               {children}
             </TooltipProvider>
+            <Toaster richColors />
           </ConvexClientProvider>
         </ThemeProvider>
       </body>
