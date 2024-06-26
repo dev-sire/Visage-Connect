@@ -46,4 +46,8 @@ export const count = query({ args: {}, handler: async(ctx, args) => {
     if(!currentUser){
         throw new ConvexError("User could not be found")
     }
+
+    const requests = await ctx.db.query("requests").withIndex("by_receiver", (q) => q.eq("receiver", currentUser._id)).collect()
+
+    return requests.length;
 }})
