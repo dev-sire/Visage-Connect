@@ -4,7 +4,7 @@ import ItemList from '@/components/shared/item-list/ItemList'
 import AddFriendDialog from './_components/AddFriendDialog'
 import { useQuery } from 'convex/react'
 import { api } from '@/convex/_generated/api'
-import { Loader2 } from 'lucide-react'
+import { Loader } from 'lucide-react'
 import Request from './_components/Request';
 
 type Props = {}
@@ -20,7 +20,7 @@ const FriendsPage = (props: Props) => {
           requests.map((request) => (
             <Request key={request.request._id} id={request.request._id} imageUrl={request.sender.imageUrl} username={request.sender.username} email={request.sender.email} />
           ))
-        ) : (<Loader2 className='h-8 w-8' />)}
+        ) : (<Loader className='h-8 w-8' />)}
       </ItemList>
       <ConversationFallback />
     </>
