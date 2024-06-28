@@ -20,7 +20,7 @@ const FriendsPage = (props: Props) => {
           requests.map((request) => (
             <Request key={request.request._id} id={request.request._id} imageUrl={request.sender.imageUrl} username={request.sender.username} email={request.sender.email} />
           ))
-        ) : (<Loader className='h-8 w-8' />)}
+        ) : (<Loader size={20} className='animate-spin' />)}
       </ItemList>
       <ConversationFallback />
     </>

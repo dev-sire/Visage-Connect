@@ -23,7 +23,7 @@ const Conversaionslayout = ({ children }: Props) => {
               imageUrl={conversation.otherMember?.imageUrl || ""} 
               username={conversation.otherMember?.username || ""} 
             />)
-        )) : <Loader />
+        )) : <Loader size={20} className='animate-spin' />
       }</ItemList>
       {children}
     </>
