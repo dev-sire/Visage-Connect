@@ -21,7 +21,9 @@ const Conversaionslayout = ({ children }: Props) => {
               key={conversation.conversation._id} 
               id={conversation.conversation._id} 
               imageUrl={conversation.otherMember?.imageUrl || ""} 
-              username={conversation.otherMember?.username || ""} 
+              username={conversation.otherMember?.username || ""}
+              lastMessageSender={conversation.lastMessage?.sender} 
+              lastMessageContent={conversation.lastMessage?.content}
             />)
         )) : <Loader size={20} className='animate-spin' />
       }</ItemList>
