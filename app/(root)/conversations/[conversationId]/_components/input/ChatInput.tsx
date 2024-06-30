@@ -21,7 +21,7 @@ const chatMessageSchema = z.object({
 })
 
 const ChatInput = () => {
-    const textAreaRef = useRef<HTMLTextAreaElement | null>(null)
+    const textareaRef = useRef<HTMLTextAreaElement | null>(null)
     const { conversationId } = useConversation()
     const { mutate: createMessage, pending} = useMutationState(api.message.create)
 
@@ -34,15 +34,22 @@ const ChatInput = () => {
 
     const handleSubmit = async (values: z.infer<typeof chatMessageSchema>) => {
         createMessage({
-            conversationId,
-            type: "text",
-            content: [values.content],
-        }).then(() => {
-            form.reset();
-        }).catch((error) => {
-            toast(error instanceof ConvexError ? error.data : "Unexpected error occured")
+          content: [values.content],
+          type: "text",
+          conversationId,
         })
-    }
+          .then(() => {
+            form.reset()
+            textareaRef.current?.focus()
+          })
+          .catch((error) => {
+            toast.error(
+              error instanceof ConvexError
+                ? error.data
+                : "Unexpected error occurred"
+            )
+          })
+      }
     const handleInputChange = (event: any) => {
         const {value, selectionStart} = event.target
         if(selectionStart !== null){
@@ -61,12 +68,13 @@ const ChatInput = () => {
                                 <TextAreaAutosize
                                     onKeyDown={async e => {
                                         if(e.key === 'Enter' && !e.shiftKey){
-                                            e.preventDefault()
-                                            await form.handleSubmit(handleSubmit)()
+                                            e.preventDefault();
+                                            await form.handleSubmit(handleSubmit)();
                                         }
                                     }}
                                     rows={1} 
                                     maxRows={3}
+                                    {...field}
                                     onChange={handleInputChange}
                                     onClick={handleInputChange}
                                     placeholder='Type a message...'
