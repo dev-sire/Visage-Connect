@@ -25,6 +25,7 @@ const Conversaionslayout = ({ children }: Props) => {
               name={conversation.conversation.name || ""}
               lastMessageSender={conversation.lastMessage?.sender} 
               lastMessageContent={conversation.lastMessage?.content}
+              unseenCount={conversation.unseenCount}
             />
           ) : (
             <DMConversationItem 
@@ -34,6 +35,7 @@ const Conversaionslayout = ({ children }: Props) => {
               username={conversation.otherMember?.username || ""}
               lastMessageSender={conversation.lastMessage?.sender} 
               lastMessageContent={conversation.lastMessage?.content}
+              unseenCount={conversation.unseenCount}
             />)
         )) : <Loader size={20} className='animate-spin' />
       }</ItemList>

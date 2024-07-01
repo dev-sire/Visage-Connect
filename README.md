@@ -1,36 +1,51 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Visage Connect: Real-time Chat Made Easy
 
-## Getting Started
+**Visage Connect** is a full-featured real-time chat application built with modern web technologies, offering seamless communication for individuals and groups.
 
-First, run the development server:
+### Key Features:
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- **Direct Messages (DMs):** Enjoy private, one-on-one conversations with your friends.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- **Group Chats:** Connect with multiple people in a single chat thread, perfect for project collaboration or keeping in touch with large groups.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- **Real-time Communication:** Messages are delivered instantly, fostering a natural flow of conversation.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+- **Read Receipts:** See when your messages have been read for added clarity.
 
-## Learn More
+- **Modern Tech Stack:** Built with Next.js 14 for a performant and scalable frontend, powered by Typescript for strong typing and code maintainability.
 
-To learn more about Next.js, take a look at the following resources:
+- **Tailwind CSS:** Leverages Tailwind for rapid UI development and a beautiful design.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- **shadCN:** Provides a sleek and customizable dark mode experience.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+- **Convex:** Utilizes Convex for a serverless, scalable backend solution (Note: Requires account creation).
 
-## Deploy on Vercel
+- **Clerk:** Employs Clerk for user authentication and authorization (Note: Requires account creation).
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Getting Started
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+While Visage Connect offers a powerful feature set, the initial setup might involve a few more steps compared to some other solutions. We understand this and have created comprehensive documentation to guide you through the process:
+
+**1. Clone the repository:** ```git clone https://github.com/dev-sire/visage-connect.git```
+
+**2. Install dependencies:** ```npm install``` **or** ```yarn install```
+
+### Backend Setup
+
+To enable the real-time chat functionality, Visage Connect utilizes Convex for the backend. To set up Convex, follow the detailed instructions here: [Convex Guide](https://docs.convex.dev/home) (Account creation required)
+
+### Authentication Setup
+
+Visage Connect leverages Clerk for user authentication and authorization. To configure Clerk, follow the step-by-step guide here: [Clerk Guide](https://clerk.com/docs/quickstarts/setup-clerk ) (Account creation required)
+
+**3. Configure environment variables:**  After completing the Convex and Clerk setups, follow the instructions within the project to set up the required environment variables for these services.
+
+**4. Run the development server:**  ```npm run dev``` **or** ```yarn dev```
+
+### Contributing
+
+We welcome contributions to Visage Connect! Remove bugs, add more features and help Visage Connect become an even better experience for everyone!
+
+### License
+
+Visage Connect is licensed under the MIT License. See the ```LICENSE``` file for details.

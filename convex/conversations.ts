@@ -29,25 +29,45 @@ export const get = query({ args: {}, handler: async (ctx, args) => {
     }))
 
     const conversationsWithDetails = await Promise.all(conversations.map(async (conversation, index) => {
-    const allConversationMemberships = await ctx.db.query("conversationMembers").withIndex("by_conversationId", (q) => q.eq("conversationId", conversation?._id)).collect()
+        const allConversationMemberships = await ctx.db.query("conversationMembers").withIndex("by_conversationId", (q) => q.eq("conversationId", conversation?._id)).collect()
 
-    const lastMessage = await lastMessageDetails({ctx, id: conversation.lastMessageId})
+        const lastMessage = await getLastMessageDetails({
+            ctx,
+            id: conversation.lastMessageId,
+        });
+
+        const lastSeenMessage = conversationsMemberships[index].lastSeenMessage
+        ? await ctx.db.get(conversationsMemberships[index].lastSeenMessage!)
+        : null;
+
+        const lastSeenMessageTime = lastSeenMessage
+        ? lastSeenMessage._creationTime
+        : -1;
+
+        const unseenMessages = await ctx.db
+        .query("messages")
+        .withIndex("by_conversationId", (q) =>
+          q.eq("conversationId", conversation?._id)
+        )
+        .filter((q) => q.gt(q.field("_creationTime"), lastSeenMessageTime))
+        .filter((q) => q.neq(q.field("senderId"), currentUser._id))
+        .collect();
 
         if(conversation.isGroup){
-            return { conversation, lastMessage }
+            return { conversation, lastMessage, unseenCount: unseenMessages.length }
         } else{
             const otherMemberships = allConversationMemberships.filter((membership) => membership.memberId !== currentUser._id)[0]
 
             const otherMember = await ctx.db.get(otherMemberships.memberId)
 
-            return { conversation, otherMember, lastMessage }
+            return { conversation, otherMember, lastMessage, unseenCount: unseenMessages.length }
         }
     }))
 
     return conversationsWithDetails;
 }})
 
-const lastMessageDetails = async({ctx, id}: {ctx: QueryCtx | MutationCtx; id: Id<"messages"> | undefined}) => {
+const getLastMessageDetails = async({ctx, id}: {ctx: QueryCtx | MutationCtx; id: Id<"messages"> | undefined}) => {
 
     if(!id) return null
     const message = await ctx.db.get(id)
@@ -57,6 +77,7 @@ const lastMessageDetails = async({ctx, id}: {ctx: QueryCtx | MutationCtx; id: Id
     const content = getMessageContent(message.type, message.content as unknown as string)
     return { content, sender: sender.username}
 }
+
 const getMessageContent = (type: string, content: string) => {
     switch(type) {
         case "text":
