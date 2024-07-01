@@ -33,7 +33,7 @@ const LeaveGroupDialog = ({ conversationId, open, setOpen }: Props) => {
                     Are you sure?
                 </AlertDialogTitle>
                 <AlertDialogDescription>
-                    This action is irreversable. You won't be able to see any previous messages or send new messages to this group. 
+                    This action is irreversable. You will not be able to see any previous messages or send new messages to this group. 
                 </AlertDialogDescription>
             </AlertDialogHeader>
             <AlertDialogFooter>

@@ -33,7 +33,7 @@ const RemoveFriendDialog = ({ conversationId, open, setOpen }: Props) => {
                     Are you sure?
                 </AlertDialogTitle>
                 <AlertDialogDescription>
-                    This action is irreversable. All message will be deleted and you won't be able to message this user. All group chats will still work as usual.
+                    This action is irreversable. All message will be deleted and you will not be able to message this user. All group chats will still work as usual.
                 </AlertDialogDescription>
             </AlertDialogHeader>
             <AlertDialogFooter>
