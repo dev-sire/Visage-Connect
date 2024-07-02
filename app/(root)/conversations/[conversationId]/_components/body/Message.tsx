@@ -27,7 +27,7 @@ const Message = ({ fromCurrentUser, senderImage, senderName, lastByUser, content
             "order-1 items-end": fromCurrentUser,
             "order-2 items-start": !fromCurrentUser
         })}>
-            <div className={cn("px-4 py-2 rounded-lg max-w-[70%]", {
+            <div className={cn("px-4 py-2 rounded-lg md:max-w-[70%] max-w-[100%]", {
                 "bg-primary text-primary-foreground": fromCurrentUser,
                 "bg-secondary text-secondary-foreground": !fromCurrentUser,
                 "rounded-br-none": !lastByUser && fromCurrentUser,
